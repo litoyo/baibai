@@ -108,8 +108,9 @@
     [self.manager GET:@"http://api.budejie.com/api/api_open.php" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         self.list = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-//        self.maxtime = responseObject[@"info"][@"maxtime"];
-        NSLog(@"%@",responseObject);
+        //取出info中的maxtime
+        self.maxtime = responseObject[@"info"][@"maxtime"];
+//        NSLog(@"%@",responseObject);
         [self.tableView reloadData];
         
         // 结束刷新
@@ -154,7 +155,12 @@
     
 }
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // 每当scrollView滚动, 就清除内存缓存
+    [[SDImageCache sharedImageCache] clearMemory];
+    
+}
 
 #pragma mark - Table view data source
 
