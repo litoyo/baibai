@@ -18,7 +18,7 @@
 @interface LIEssenceTableView ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) AFHTTPSessionManager *manger;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 /** 用来加载下一页数据 */
 @property (nonatomic,strong) NSString *maxtime;
 
@@ -39,49 +39,121 @@
     return self;
 }
 
-- (AFHTTPSessionManager *)manger{
+- (AFHTTPSessionManager *)manager{
     
-    if (_manger == nil) {
-        _manger = [AFHTTPSessionManager manager];
+    if (_manager == nil) {
+        _manager = [AFHTTPSessionManager manager];
     }
-    return  _manger;
+    return  _manager;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadMore];
+    //刚进去页面就下拉刷新
+//    [self loadNewData];
+    //下拉刷新
+    [self XiaLaShuaXin];
+    //上拉加载更多
+    [self ShangLaShuaXin];
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-//上拉加载更多
-- (void)loadMore{
+//下拉刷新
+- (void)XiaLaShuaXin{
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    [header setTitle:@"下拉刷新" forState:MJRefreshStateIdle];
+    [header setTitle:@"释放刷新" forState:MJRefreshStatePulling];
+    [header setTitle:@"Loading ..." forState:MJRefreshStateRefreshing];
+    // Set font
+    header.stateLabel.font = [UIFont systemFontOfSize:15];
+    header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];
+    // Set textColor
+    header.stateLabel.textColor = [UIColor redColor];
+    header.lastUpdatedTimeLabel.textColor = [UIColor blueColor];
+    self.tableView.mj_header = header;
+}
 
+//上拉刷新
+
+- (void)ShangLaShuaXin{
+
+    MJRefreshBackGifFooter *footer = [MJRefreshBackGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    // Set the normal state of the animated image
+    [footer setTitle:@"上拉刷新" forState:MJRefreshStateIdle];
+    [footer setTitle:@"释放刷新" forState:MJRefreshStatePulling];
+    [footer setTitle:@"Loading ..." forState:MJRefreshStateRefreshing];
+    // Set footer
+    self.tableView.mj_footer = footer;
+}
+
+//下拉数据请求
+- (void)loadNewData{
+    NSLog(@"123");
+    
     NSDictionary *dict = @{
                            @"a":@"list",
                            @"type":@"29",
                            @"c":@"data",
-//                           @"maxtime":self.maxtime,
-                           
                            };
     
-    [self.manger GET:@"http://api.budejie.com/api/api_open.php" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.manager GET:@"http://api.budejie.com/api/api_open.php" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
         
         self.list = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-        
-//        NSLog(@"%@",responseObject);
+//        self.maxtime = responseObject[@"info"][@"maxtime"];
+        NSLog(@"%@",responseObject);
         [self.tableView reloadData];
-//        NSLog(@"%@",self.list);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
+
+    }];
+
+}
+
+//上拉数据请求
+- (void)loadMoreData{
+    NSLog(@"123");
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"a"] = @"list";
+    parameters[@"type"] = @"29";
+    parameters[@"c"] = @"data";
+    parameters[@"maxtime"] = self.maxtime;
+    
+    //发送请求
+    [self.manager GET:@"http://api.budejie.com/api/api_open.php" parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        //        [responseObject writeToFile:@"/Users/litoyo/Desktop/qp.plist" atomically:YES];
+        
+        //取出info中的maxtime
+        self.maxtime = responseObject[@"info"][@"maxtime"];
+        
+        //字典转模型
+         self.list = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+
+        //刷新表格
+        [self.tableView reloadData];
+        // 结束刷新
+        [self.tableView.mj_footer endRefreshing];
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 结束刷新
+        [self.tableView.mj_footer endRefreshing];
     }];
     
 }
+
 
 
 #pragma mark - Table view data source
