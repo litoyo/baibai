@@ -7,21 +7,51 @@
 //
 
 #import "LIEssenceTableView.h"
+#import "LICellTableViewCell.h"
+#import "AFNetWorking.h"
+#import "MJRefresh.h"
+#import "MJExtension.h"
+#import "LIEssenceModel.h"
+#import "UIImageView+WebCache.h"
+#import "UIImage+Image.h"
 
-@interface LIEssenceTableView ()
+@interface LIEssenceTableView ()<UITableViewDataSource,UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) AFHTTPSessionManager *manger;
+/** 用来加载下一页数据 */
+@property (nonatomic,strong) NSString *maxtime;
+
+@property (nonatomic, strong) NSArray *list;
 
 @end
 
 @implementation LIEssenceTableView
 
+- (instancetype) init{
+
+    self = [super init];
+    
+    if (self) {
+        self = [UIStoryboard storyboardWithName:@"LIEssenceTableView" bundle:nil].instantiateInitialViewController;
+    }
+    
+    return self;
+}
+
+- (AFHTTPSessionManager *)manger{
+    
+    if (_manger == nil) {
+        _manger = [AFHTTPSessionManager manager];
+    }
+    return  _manger;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self loadMore];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,70 +59,57 @@
     // Dispose of any resources that can be recreated.
 }
 
+//上拉加载更多
+- (void)loadMore{
+
+    NSDictionary *dict = @{
+                           @"a":@"list",
+                           @"type":@"29",
+                           @"c":@"data",
+//                           @"maxtime":self.maxtime,
+                           
+                           };
+    
+    [self.manger GET:@"http://api.budejie.com/api/api_open.php" parameters:dict success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        self.list = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+        
+//        NSLog(@"%@",responseObject);
+        [self.tableView reloadData];
+//        NSLog(@"%@",self.list);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+}
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    return self.list.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    LICellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LICellTableViewCell" forIndexPath:indexPath];
+    LIEssenceModel *model = self.list[indexPath.row];
     
-    // Configure the cell...
-    
+    [cell.touxiang sd_setImageWithURL:[NSURL URLWithString:model.profile_image] placeholderImage:[UIImage imageNamed:@"defaultUserIcon"]];
+    cell.mingchen.text = model.name;
+    cell.neirong.text = model.text;
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 模型数据
+    
+    LIEssenceModel *model = self.list[indexPath.row];
+    return model.cellHeight;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
