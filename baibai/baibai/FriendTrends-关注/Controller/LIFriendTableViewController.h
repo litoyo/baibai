@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LIFriendTableViewController.h
 //  baibai
 //
 //  Created by litoyo on 16/9/17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LIFriendTableViewController : UITableViewController
 
 @end
-
