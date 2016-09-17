@@ -28,6 +28,11 @@
 		DCBE9BA91D8CF02300E9777A /* LIFriendTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BA81D8CF02300E9777A /* LIFriendTableViewController.m */; };
 		DCBE9BAC1D8CF03300E9777A /* LIMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BAB1D8CF03300E9777A /* LIMeTableViewController.m */; };
 		DCBE9BAF1D8CF0C300E9777A /* LIShopTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BAE1D8CF0C300E9777A /* LIShopTableViewController.m */; };
+		DCBE9BBC1D8D051500E9777A /* NLGlobeConst.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BBB1D8D051500E9777A /* NLGlobeConst.m */; };
+		DCBE9BBF1D8D073800E9777A /* UIImageView+Header.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BBE1D8D073800E9777A /* UIImageView+Header.m */; };
+		DCBE9BC21D8D07E100E9777A /* UIImage+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BC11D8D07E100E9777A /* UIImage+Image.m */; };
+		DCBE9BC71D8D08AD00E9777A /* NSCalendar+Init.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BC41D8D08AD00E9777A /* NSCalendar+Init.m */; };
+		DCBE9BC81D8D08AD00E9777A /* NSDate+Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBE9BC61D8D08AD00E9777A /* NSDate+Interval.m */; };
 		DCDE6A2B1D8C619400C8A45A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDE6A2A1D8C619400C8A45A /* main.m */; };
 		DCDE6A2E1D8C619400C8A45A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDE6A2D1D8C619400C8A45A /* AppDelegate.m */; };
 		DCDE6A341D8C619400C8A45A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCDE6A321D8C619400C8A45A /* Main.storyboard */; };
@@ -79,6 +84,16 @@
 		DCBE9BAB1D8CF03300E9777A /* LIMeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIMeTableViewController.m; sourceTree = "<group>"; };
 		DCBE9BAD1D8CF0C300E9777A /* LIShopTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIShopTableViewController.h; sourceTree = "<group>"; };
 		DCBE9BAE1D8CF0C300E9777A /* LIShopTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LIShopTableViewController.m; sourceTree = "<group>"; };
+		DCBE9BBA1D8D051500E9777A /* NLGlobeConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLGlobeConst.h; sourceTree = "<group>"; };
+		DCBE9BBB1D8D051500E9777A /* NLGlobeConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLGlobeConst.m; sourceTree = "<group>"; };
+		DCBE9BBD1D8D073800E9777A /* UIImageView+Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Header.h"; sourceTree = "<group>"; };
+		DCBE9BBE1D8D073800E9777A /* UIImageView+Header.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Header.m"; sourceTree = "<group>"; };
+		DCBE9BC01D8D07E100E9777A /* UIImage+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Image.h"; sourceTree = "<group>"; };
+		DCBE9BC11D8D07E100E9777A /* UIImage+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Image.m"; sourceTree = "<group>"; };
+		DCBE9BC31D8D08AD00E9777A /* NSCalendar+Init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+Init.h"; sourceTree = "<group>"; };
+		DCBE9BC41D8D08AD00E9777A /* NSCalendar+Init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+Init.m"; sourceTree = "<group>"; };
+		DCBE9BC51D8D08AD00E9777A /* NSDate+Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Interval.h"; sourceTree = "<group>"; };
+		DCBE9BC61D8D08AD00E9777A /* NSDate+Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Interval.m"; sourceTree = "<group>"; };
 		DCDE6A261D8C619400C8A45A /* baibai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baibai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCDE6A2A1D8C619400C8A45A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DCDE6A2C1D8C619400C8A45A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -302,6 +317,16 @@
 		DCBE9B481D8CEDAA00E9777A /* Other-其他 */ = {
 			isa = PBXGroup;
 			children = (
+				DCBE9BC31D8D08AD00E9777A /* NSCalendar+Init.h */,
+				DCBE9BC41D8D08AD00E9777A /* NSCalendar+Init.m */,
+				DCBE9BC51D8D08AD00E9777A /* NSDate+Interval.h */,
+				DCBE9BC61D8D08AD00E9777A /* NSDate+Interval.m */,
+				DCBE9BC01D8D07E100E9777A /* UIImage+Image.h */,
+				DCBE9BC11D8D07E100E9777A /* UIImage+Image.m */,
+				DCBE9BBD1D8D073800E9777A /* UIImageView+Header.h */,
+				DCBE9BBE1D8D073800E9777A /* UIImageView+Header.m */,
+				DCBE9BBA1D8D051500E9777A /* NLGlobeConst.h */,
+				DCBE9BBB1D8D051500E9777A /* NLGlobeConst.m */,
 				DCBE9B4B1D8CEDAA00E9777A /* Category */,
 			);
 			path = "Other-其他";
@@ -527,11 +552,15 @@
 				DCBE9AEA1D8CEC4E00E9777A /* CYLTabBarControllerConfig.m in Sources */,
 				DCBE9BA31D8CEDAA00E9777A /* XMGFileCacheManager.m in Sources */,
 				DCBE9B961D8CEDAA00E9777A /* NSCalendar+Init.m in Sources */,
+				DCBE9BC81D8D08AD00E9777A /* NSDate+Interval.m in Sources */,
 				DCBE9B981D8CEDAA00E9777A /* UIBarButtonItem+NLExtension.m in Sources */,
+				DCBE9BBC1D8D051500E9777A /* NLGlobeConst.m in Sources */,
 				DCBE9BA91D8CF02300E9777A /* LIFriendTableViewController.m in Sources */,
 				DCBE9B971D8CEDAA00E9777A /* NSDate+Interval.m in Sources */,
 				DCDE6A2E1D8C619400C8A45A /* AppDelegate.m in Sources */,
 				DCBE9B9D1D8CEDAA00E9777A /* UIImageView+Header.m in Sources */,
+				DCBE9BBF1D8D073800E9777A /* UIImageView+Header.m in Sources */,
+				DCBE9BC21D8D07E100E9777A /* UIImage+Image.m in Sources */,
 				DCBE9BAF1D8CF0C300E9777A /* LIShopTableViewController.m in Sources */,
 				DCBE9BA61D8CF00200E9777A /* LIEssenceTableView.m in Sources */,
 				DCBE9B9C1D8CEDAA00E9777A /* UIImageView+Download.m in Sources */,
@@ -540,6 +569,7 @@
 				DCBE9AE31D8CEB8E00E9777A /* CYLPlusButton.m in Sources */,
 				DCBE9B991D8CEDAA00E9777A /* UIColor+Hex.m in Sources */,
 				DCBE9AE41D8CEB8E00E9777A /* CYLTabBar.m in Sources */,
+				DCBE9BC71D8D08AD00E9777A /* NSCalendar+Init.m in Sources */,
 				DCBE9B9E1D8CEDAA00E9777A /* UIView+Frame.m in Sources */,
 				DCBE9AE61D8CEB8E00E9777A /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
 				DCBE9BAC1D8CF03300E9777A /* LIMeTableViewController.m in Sources */,

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LIEssenceTableView : UITableViewController
+@interface LIEssenceTableView : UIViewController
 
 @end
