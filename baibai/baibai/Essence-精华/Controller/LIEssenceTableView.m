@@ -14,6 +14,7 @@
 #import "LIEssenceModel.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+Image.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface LIEssenceTableView ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -22,7 +23,12 @@
 /** 用来加载下一页数据 */
 @property (nonatomic,strong) NSString *maxtime;
 
-@property (nonatomic, strong) NSArray *list;
+//保存所有帖子的数据
+@property (nonatomic,strong) NSMutableArray *topics;
+
+@property (nonatomic, strong) NSMutableArray *list;
+
+@property (nonatomic, strong) UIView *cover;
 
 @end
 
@@ -93,7 +99,10 @@
     [footer setTitle:@"Loading ..." forState:MJRefreshStateRefreshing];
     // Set footer
     self.tableView.mj_footer = footer;
+    
+//     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"MainTagSubIconClick"] style:UIBarButtonItemStylePlain target:self action:@selector(activity)];
 }
+
 
 //下拉数据请求
 - (void)loadNewData{
@@ -140,9 +149,14 @@
         //取出info中的maxtime
         self.maxtime = responseObject[@"info"][@"maxtime"];
         
+        
         //字典转模型
-         self.list = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
-
+         NSArray *moreTopics = [LIEssenceModel mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
+        
+        //======================重要=========================
+        //下拉刷新是替换数组,上拉刷新是替换数组,如果想优化不等高cell,可以缓存高度.
+        [self.list addObjectsFromArray:moreTopics];
+        
         //刷新表格
         [self.tableView reloadData];
         // 结束刷新
